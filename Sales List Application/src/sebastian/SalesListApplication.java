@@ -20,6 +20,7 @@ public class SalesListApplication {
 	private JTextField QuantityTextField;
 	private JTextArea TotalSalesOutput;
 	private JTextPane SalesListOutput; 
+	private JButton AddItem; 
 	private SalesList SalesListObject = new SalesList();
 	
 	/**
@@ -86,7 +87,7 @@ public class SalesListApplication {
 		frame.getContentPane().add(QuantityTextField);
 		
 		
-		JButton AddItem = new JButton("Add Item To Sales List");
+		AddItem = new JButton("Add Item To Sales List");
 		AddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addItem();
@@ -115,6 +116,7 @@ public class SalesListApplication {
 	
 	private void addItem() {
 		try {
+			AddItem.setText("Add Item To Sales List");
 			String name = NameTextField.getText();
 			double price = 0.00;
 			price = Double.valueOf(PriceTextField.getText());
@@ -125,8 +127,8 @@ public class SalesListApplication {
 			SalesListOutput.setText(SalesListObject.toString());
 			TotalSalesOutput.setText(SalesListObject.getTotalSales());
 			
-		} catch (Exception e) {}
-		
-		
+		} catch (Exception e) {
+			AddItem.setText("Error! Incorrect Data Type!");
+		}
 	}
 }

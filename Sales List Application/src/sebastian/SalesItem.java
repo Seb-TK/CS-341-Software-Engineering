@@ -1,3 +1,4 @@
+package sebastian;
 
 public class SalesItem {
 	
@@ -31,7 +32,6 @@ public class SalesItem {
 	
 	private void formatPrice() {
 		price = Math.round(price * 100.0) / 100.0;
-		//price = Double.valueOf(String.format("$%.2f", price));
 	}
 	
 	public void setQuantity(int quantity) {

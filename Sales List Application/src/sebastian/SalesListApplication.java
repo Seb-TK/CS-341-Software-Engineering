@@ -1,3 +1,4 @@
+package sebastian;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,7 +14,7 @@ import javax.swing.JTextPane;
 
 public class SalesListApplication {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField NameTextField;
 	private JTextField PriceTextField;
 	private JTextField QuantityTextField;

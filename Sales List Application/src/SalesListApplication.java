@@ -114,14 +114,11 @@ public class SalesListApplication {
 	
 	private void addItem() {
 		try {
-			System.out.println("hi");
 			String name = NameTextField.getText();
 			double price = 0.00;
 			price = Double.valueOf(PriceTextField.getText());
 			int quantity = Integer.valueOf(QuantityTextField.getText());
-			System.out.println("hi2");
 			SalesItem NewSalesItem = new SalesItem(name, price, quantity);
-			System.out.println("hi3");
 			SalesListObject.addItem(NewSalesItem);
 			
 			SalesListOutput.setText(SalesListObject.toString());

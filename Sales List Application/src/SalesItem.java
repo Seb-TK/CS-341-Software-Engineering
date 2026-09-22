@@ -44,8 +44,6 @@ public class SalesItem {
 	
 	public String toString() {
 		String output = String.format("%-20s $%7.2f %5d", name, price, quantity);
-		System.out.println("erfw");
-		//String output = name + " " + price + " " + quantity;
 		
 		return output;
 	}

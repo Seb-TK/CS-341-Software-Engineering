@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,11 +9,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ScrabbleApp {
 
 	private JFrame frame;
 	private JTextField InputArea;
+	private JTextArea OutputTextArea;
+	private List<String> combinations;
 
 	/**
 	 * Launch the application.
@@ -58,11 +65,75 @@ public class ScrabbleApp {
 		frame.getContentPane().add(InputLabel);
 		
 		JButton OutputButton = new JButton("Generate Combinations");
+		OutputButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				combinations = new ArrayList<String>();
+				runScript();
+			}
+		});
 		OutputButton.setBounds(132, 135, 197, 29);
 		frame.getContentPane().add(OutputButton);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(92, 172, 278, 81);
-		frame.getContentPane().add(scrollPane);
+		JScrollPane OutputScrollPane = new JScrollPane();
+		OutputScrollPane.setBounds(121, 188, 228, 64);
+		frame.getContentPane().add(OutputScrollPane);
+		
+		OutputTextArea = new JTextArea();
+		OutputTextArea.setEditable(false);
+		OutputScrollPane.setViewportView(OutputTextArea);
 	}
+	
+	private void runScript() {
+		String input = InputArea.getText();
+		
+		int inputLength = 7;
+		if(input.length() > inputLength | input.length() < inputLength) {
+			OutputTextArea.setText("Error: Only choose 7 characters!");
+			return;
+		} else {
+			for(int i = 0; i < inputLength; i ++) {
+				if(!Character.isLetter(input.charAt(i))){
+					OutputTextArea.setText("Error: Only choose letters!");
+					return;
+				}
+			}
+		}
+		List<Integer> charList = new ArrayList<Integer>();
+		charList.add(-1);
+		generateCombinations("", charList);
+		displayCombinations();
+	}
+	
+	private void generateCombinations(String currentString, List<Integer> charList){
+		String inputString = InputArea.getText();
+		int currentDigit = currentString.length();
+		List<Integer> newCharList = new ArrayList<>(charList);
+		
+		if(currentDigit == inputString.length()) {
+			if(!combinations.contains(currentString)) {
+				combinations.add(currentString);
+				System.out.println(currentString + newCharList.toString());
+			}
+			return;
+		}
+		
+		for(int i = 0; i < inputString.length(); i++) {
+			String targetDigit = String.valueOf(inputString.charAt(i));
+			
+			if(!newCharList.contains(i)) {
+				List<Integer> myCharList = new ArrayList<>(newCharList);
+				myCharList.add(i);
+				generateCombinations(currentString + targetDigit, myCharList);
+			}
+		}
+	}
+	
+	private void displayCombinations() {
+		String output = "";
+		for(int i = 0; i < combinations.size(); i++) {
+			output += combinations.get(i) + "\n";
+		}
+		OutputTextArea.setText(output);
+	}
+	
 }

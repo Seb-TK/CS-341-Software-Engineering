@@ -8,6 +8,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * A simple application that tests the strength of a password
+ * 
+ * @author Sebastian Tucker-Kyriakos
+ * @version 1.0
+ */
 public class PasswordStrengthApp {
 
 	private JFrame frame;

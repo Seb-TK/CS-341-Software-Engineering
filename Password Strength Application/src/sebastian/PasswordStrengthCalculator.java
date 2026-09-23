@@ -1,13 +1,30 @@
 package sebastian;
 
+/**
+ * The functionality for the password strength application.
+ * Takes an input and loops through to find "blocks" which 
+ * are consecutive characters
+ * 
+ * @author Sebastian Tucker-Kyriakos
+ * @version 1.0
+ */
 public class PasswordStrengthCalculator {
 	
 	private int minLength = 8;
 	private int maxLength = 12;
 	private int minBlockLength = 2;
 	
+	/**
+	 * Default constructor for password strength calculator
+	 */
 	public PasswordStrengthCalculator() {}
 	
+	/**
+	 * Calculates the strength of a password by finding blocks of similar characters
+	 * 
+	 * @param input The password input as a string
+	 * @return Returns a string about the password strength
+	 */
 	public String calculateStrength(String input) {
 		System.out.println(input);
 		System.out.println(input.length());
@@ -37,7 +54,13 @@ public class PasswordStrengthCalculator {
 			
 		return output;
 	}
-	
+	/**
+	 * Using an input string, finds the length of the longest
+	 * consequtive string of characters. Case sensitive.
+	 * 
+	 * @param input Takes in the password as a string
+	 * @return Returns the biggest block of consequtive identical characters
+	 */
 	private int findBlock(String input) {
 		int biggestBlockLength = 0;
 		int blockLength = 0;

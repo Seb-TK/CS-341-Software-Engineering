@@ -9,7 +9,7 @@ import java.awt.EventQueue;
 import org.junit.jupiter.api.Test;
 
 /**
- * test script for the scrabble application
+ * Test script for the Scrabble combination application.
  */
 class ScrabbleAppTest {
 	public static void main(String[] args) {

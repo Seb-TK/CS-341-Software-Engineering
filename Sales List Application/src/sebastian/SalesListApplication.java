@@ -12,6 +12,15 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
+/**
+ * Sales list application is an application that creates a 
+ * list of sales items. Each item is an object storing its 
+ * name, price, and quantity. It can be added to and 
+ * the values can be totaled.
+ * 
+ * @author Sebastian Tucker-Kyriakos
+ * @version 1.0
+ */
 public class SalesListApplication {
 
 	public JFrame frame;

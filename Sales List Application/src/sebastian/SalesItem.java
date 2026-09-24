@@ -1,10 +1,12 @@
 package sebastian;
 
 /**
- * Class used for sales item objects that store information about an item
- * Used in the sales list application
+ * Represents a sales item, storing it's name, price and quantity.
+ * Has a few functions to manipulate and return the data.
+ * Used in the sales list application.
  * 
  * @author Sebastian Tucker-Kyriakos
+ * @version 1.0
  */
 public class SalesItem {
 	

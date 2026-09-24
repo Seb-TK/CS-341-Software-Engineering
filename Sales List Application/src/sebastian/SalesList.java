@@ -2,9 +2,13 @@ package sebastian;
 import java.util.LinkedList;
 
 /**
- * Represets a list of sales containing sale item objects
- * Items are stored as a linked list
- * Each item contains the item object which has the name, price and quantity of the item
+ * Represets a list of sales containing sale item objects.
+ * Items are stored as a linked list, and each item contains 
+ * an item object. This object has the name, price and quantity 
+ * of the item as well as some of it's own functions.
+ * 
+ * @author Sebastian Tucker-Kyriakos
+ * @version 1.0
  */
 public class SalesList {
 	

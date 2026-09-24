@@ -6,7 +6,9 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
 /**
- * Class that holds the functions for the scrabble application class
+ * Class that holds the functions for the Scrabble combination
+ * application class. Methods recursively loop through the
+ * letters to find and display all combinations.
  */
 public class ScrabbleFunctionality {
 	
@@ -19,9 +21,9 @@ public class ScrabbleFunctionality {
 	}
 	
 	/**
-	 * Runs the scrabble combination generation script: 
-	 * Gathers the input and recursively generates all of the 
-	 * combinations before displaying them to the output text area
+	 * Runs the scrabble combination generation script.
+	 * Grabs the input and recursively generates all of the 
+	 * combinations before displaying them to the output text area.
 	 * 
 	 * @param thisInputArea the text field with the input word
 	 * @param thisOutputTextArea the text area where the output will be displayed
@@ -55,7 +57,7 @@ public class ScrabbleFunctionality {
 	}
 	
 	/**
-	 * Recursive method for generating the scrabble combinations
+	 * Recursive method for generating the Scrabble combinations.
 	 * 
 	 * @param currentString the current string being iterated on
 	 * @param charList a list of all of the characters in the input that have been used in the form of their char indexs

@@ -9,7 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * A simple application that tests the strength of a password
+ * A simple application that tests the strength of a password.
+ * It does this by looping through the password and finding
+ * the biggest "block" of consecutive characters that are identical, 
+ * case sensitive. It then displays this amount and gives a suggestion depending on 
+ * the block length. Has error checks to keep within a length and no spaces.
  * 
  * @author Sebastian Tucker-Kyriakos
  * @version 1.0

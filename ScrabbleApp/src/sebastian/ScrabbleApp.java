@@ -14,9 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Scrabble Application: Takes a 7 letter word and generates
- * all of the combinations that the letters in that word creates.
- * Displays these combinations in a scrollable text area below
+ * Scrabble combination finder application. It takes a 7 letter 
+ * word and generates all of the possible combinations 
+ * that the letters in that word creates. Displays these 
+ * combinations in a scrollable text area below.
  */
 public class ScrabbleApp {
 

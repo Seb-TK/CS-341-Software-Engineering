@@ -3,7 +3,9 @@ package sebastian;
 /**
  * The functionality for the password strength application.
  * Takes an input and loops through to find "blocks" which 
- * are consecutive characters
+ * are consecutive characters, case sensitive, then gives
+ * A suggestion depending on the biggest block's length.
+ * Includes error checks for length of password and doesn't allow spaces. 
  * 
  * @author Sebastian Tucker-Kyriakos
  * @version 1.0

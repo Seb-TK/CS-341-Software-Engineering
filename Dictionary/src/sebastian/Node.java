@@ -2,12 +2,25 @@ package sebastian;
 
 public class Node {
 	
-	String word;
-	Node leftChild;
-	Node rightChild;
+	private String word;
+	private Node leftChild;
+	private Node rightChild;
+	private Node parent;
 	
 	public Node(String word) {
 		this.word = word;
+	}
+	
+	public int compareTo(Node node) {
+		return word.compareTo(node.getWord());
+	}
+	
+	public void setWord(String word) {
+		this.word = word;
+	}
+	
+	public String getWord() {
+		return word;
 	}
 	
 	public void setLeft(Node child) {
@@ -17,12 +30,18 @@ public class Node {
 	public void setRight(Node child) {
 		rightChild = child;
 	}
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
 	
-	public Node getLeft() {
+	public Node left() {
 		return leftChild;
 	}
-	public Node getRight() {
-		return leftChild;
+	public Node right() {
+		return rightChild;
+	}
+	public Node parent() {
+		return parent;
 	}
 	
 	

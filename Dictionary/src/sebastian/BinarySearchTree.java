@@ -7,63 +7,89 @@ public class BinarySearchTree {
 	
 	public BinarySearchTree() {}
 	
-	public void addNode(String word){
-		Node node = new Node(word);
+	//returns the node with the same word as the input
+	//if it doesnt exist, returns the parent that node 
+	//would have if it were in the tree
+	//return null if tree is empty;
+	public Node findNodeOrPotentialParent(String word) {
+		Node inputNode = new Node(word);
 		
 		if(root == null) {
-			root = node;
-			return;
-		} 
+			//tree empty
+			return null;
+		}
 		
 		Node pointer = root;
 		while(true) {
 			Node leftChild = pointer.left();
 			Node rightChild = pointer.right();
-			int compare = word.compareTo(pointer.getWord());
-			if(compare < 0) {
+			int compareNodes = inputNode.isEqualTo(pointer);
+			
+			if(compareNodes < 0) {
 				if(leftChild == null) {
-					leftChild = node;
-					node.setParent(pointer);
-					return;
+					break;
 				} else {
 					pointer = leftChild;
 				}
-			} else if(compare > 0) {
+			} else if(compareNodes > 0) {
 				if(rightChild == null) {
-					rightChild = node;
-					node.setParent(pointer);
-					return;
+					break;
 				} else {
 					pointer = rightChild;
 				}
 			} else {
-				return;
+				break;
 			}
+		}
+		
+		return pointer;
+	}
+	
+	public void insertWordNode(String word){
+		
+		Node inputNode = new Node(word);
+		
+		if(root == null) {
+			root = inputNode;
+		}
+		
+		Node parentNode = findNodeOrPotentialParent(word);
+		int compareNodes = inputNode.isEqualTo(parentNode);
+		
+		if(compareNodes < 0) {
+			parentNode.setLeft(inputNode);
+		} else if(compareNodes > 0) {
+			parentNode.setRight(inputNode);
+		} else {
+			return;
 		}
 	}
 	
-	public String toString() {
+	public void checkWord(String word) {
+		Node inputNode = new Node(word);
+		Node nodeFound = findNodeOrPotentialParent(word);
 		
-		if(root == null) {
-			return "Tree Empty";
+		if(nodeFound.isEqualTo(inputNode) == 0) {
+			
 		}
-		String treeAsString = "";
-		Node pointer = root;
-
-		while(true) {
-			//maybe do it recursively or add a stack
-			//add to stack and reverse your way back up
-			treeAsString += pointer.getWord();
-			if(pointer.left() != null) {
-				pointer = pointer.left();
-			} else if (pointer.right() != null) {
-				pointer = pointer.right();
-			} else {
-				pointer = pointer.parent();
-			}
-		}
-		
-		
 		
 	}
+	
+	
+	public boolean spellCheck(String word){
+		
+		Node potentialNode = findNodeOrPotentialParent(word);
+		Node inputNode = new Node(word);
+		
+		int compareNodes = inputNode.isEqualTo(potentialNode);
+		
+		if(compareNodes == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
 }

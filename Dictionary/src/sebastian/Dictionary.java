@@ -5,13 +5,21 @@ public class Dictionary {
 	
 	Node root;
 	
+	/**
+	 * Creates a dictionary
+	 */
 	public Dictionary() {}
 	
-	//returns the node with the same word as the input
-	//if it doesnt exist, returns the parent that node 
-	//would have if it were in the tree
-	//return null if tree is empty;
-	public Node findNodeOrPotentialParent(String word) {
+	/**
+	 * Finds the node containing the specified word.
+	 * If the word does not exist, returns the node that would
+	 * become its parent if the word were inserted.
+	 *
+	 * @param word the word to search for
+	 * @return the matching node, the potential parent node,
+	 *         or null if the dictionary is empty
+	 */
+	private Node findNodeOrPotentialParent(String word) {
 		Node inputNode = new Node(word);
 		
 		if(root == null) {
@@ -23,7 +31,7 @@ public class Dictionary {
 		while(true) {
 			Node leftChild = pointer.left();
 			Node rightChild = pointer.right();
-			int nodeComparason = inputNode.isEqualTo(pointer);
+			int nodeComparason = inputNode.compareTo(pointer);
 			
 			if(nodeComparason < 0) {
 				if(leftChild == null) {
@@ -45,6 +53,7 @@ public class Dictionary {
 		return pointer;
 	}
 	
+	
 	public void insertWordNode(String word){
 		
 		Node inputNode = new Node(word);
@@ -55,7 +64,7 @@ public class Dictionary {
 		}
 		
 		Node parentNode = findNodeOrPotentialParent(word);
-		int nodeComparason = inputNode.isEqualTo(parentNode);
+		int nodeComparason = inputNode.compareTo(parentNode);
 		
 		if(nodeComparason < 0) {
 			parentNode.setLeft(inputNode);
@@ -67,11 +76,20 @@ public class Dictionary {
 		inputNode.setParent(parentNode);
 	}
 	
+	
+	public void insertWordNodeLong(String text){
+		String[] textAsList = text.split("[^a-zA-Z]+");
+		for(int i = 0; i < textAsList.length; i++) {
+			insertWordNode(textAsList[i]);
+		}
+	}
+	
+	
 	public void checkWord(String word) {
 		Node inputNode = new Node(word);
-		Node removedNode = findNodeOrPotentialParent(word);
+		Node nodeToRemove = findNodeOrPotentialParent(word);
 		
-		int nodeComparison = removedNode.isEqualTo(inputNode);
+		int nodeComparison = nodeToRemove.compareTo(inputNode);
 		
 		if(nodeComparison == 0) {
 			//node found now remove
@@ -80,32 +98,45 @@ public class Dictionary {
 			//left checked first if not then right
 			//if there are no children then you can just leave
 			Node childToMove;
-			if(removedNode.left() != null) {
-				childToMove = removedNode.left();
-			} else if(removedNode.right() != null) {
-				childToMove = removedNode.right();
+			if(nodeToRemove.left() != null) {
+				childToMove = nodeToRemove.left();
+			} else if(nodeToRemove.right() != null) {
+				childToMove = nodeToRemove.right();
 			} else {
 				return;
 			}
 			//ask which child this removed node is
 			//whichever it is, take replace that child with the
 			//new and improved child to move
-			Node parent = removedNode.parent();
-			if(parent.left().isEqualTo(removedNode) == 0) {
-				parent.setLeft(childToMove);
-			} else if(parent.right().isEqualTo(removedNode) == 0) {
+			Node parent = nodeToRemove.parent();
+			if(parent.left() != null) {
+				if(parent.left().compareTo(nodeToRemove) == 0) {
+					parent.setLeft(childToMove);
+				}
+			} else if(parent.right().compareTo(nodeToRemove) == 0) {
 				parent.setRight(childToMove);
 			}
 			childToMove.setParent(parent);
 		}
 	}
 	
-	public boolean spellCheck(String word){
+	public void checkWordLong(String text){
+		String[] textAsList = text.split(" ");
+		for(int i = 0; i < textAsList.length; i++) {
+			checkWord(textAsList[i]);
+		}
+	}
+	
+	private boolean spellCheckWord(String word){
 		
 		Node potentialNode = findNodeOrPotentialParent(word);
 		Node inputNode = new Node(word);
 		
-		int compareNodes = inputNode.isEqualTo(potentialNode);
+		if(potentialNode == null) {
+			return false;
+		}
+		
+		int compareNodes = inputNode.compareTo(potentialNode);
 		
 		if(compareNodes == 0) {
 			return true;
@@ -114,56 +145,60 @@ public class Dictionary {
 		}
 	}
 	
+	//decided to make it work for text in general
+	public boolean spellCheck(String text) {
+		boolean output = true;
+		String[] textAsList = text.split(" ");
+		for(int i = 0; i < textAsList.length; i++) {
+			output = spellCheckWord(textAsList[i]);
+			if(output == false) {
+				break;
+			}
+		}
+		return output;
+	}
+	
+	
+	
+	
 	public String toString() {
 		ArrayList<String> outputList = new ArrayList<String>();
 		
 		if(root == null) {
-			return "Empty";
+			return null;
 		}
 		
 		Node pointer = root;
-		outputList.add(root.getWord());
 		
-		for(int i = 0; i < 10; i ++) {
-			
-			System.out.println("The current pointer is: " + pointer.getWord());
-			System.out.println("The current output is: " + outputList.toString());
-			
-			try {
-				System.out.println("The current pointer left is: " + pointer.left().getWord());
-			} catch(Exception e) {
-				System.out.println("Pointer left null is: " + (pointer.left() == null));
-			}
-			
-			try {
-				System.out.println("The current pointer right is: " + pointer.right().getWord());
-			} catch(Exception e) {
-				System.out.println("Pointer right null is: " + (pointer.right() == null));
-			}
-			
-			try {
-				System.out.println("The current pointer parent is: " + pointer.parent().getWord());
-			} catch(Exception e) {
-				System.out.println("Pointer parent " + (pointer.parent() == null));
-			}
-			System.out.println();
+		while(true) {
 			
 			
-			if(pointer.left() != null & !outputList.contains(pointer.left().getWord())) {
-				System.out.println("I am now going left to pointer: " + pointer.left().getWord());
-				pointer = pointer.left();
+			if(pointer.left() != null) {
+				
+				if(!outputList.contains(pointer.left().getWord())) {
+					
+					pointer = pointer.left();
+					continue;
+				}
+			} 
+			
+			if(!outputList.contains(pointer.getWord())) {
 				outputList.add(pointer.getWord());
-			} else if(pointer.right() != null & !outputList.contains(pointer.right().getWord())) {
-				System.out.println("I am now going right to pointer: " + pointer.right().getWord());
-				pointer = pointer.right();
-				outputList.add(pointer.getWord());
-			} else if(pointer.parent() != null){
-				System.out.println("I am now going up to parent: " + pointer.parent().getWord());
+			}
+			
+			if(pointer.right() != null) {
+				
+				if(!outputList.contains(pointer.right().getWord())){
+					
+					pointer = pointer.right();
+					continue;
+				}
+			}
+			if(pointer.parent() != null) {
 				pointer = pointer.parent();
-			} else {
-				break;
+				continue;
 			}
-			
+			break;
 		}
 		
 		//formats it

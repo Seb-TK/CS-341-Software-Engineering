@@ -11,7 +11,7 @@ public class Node {
 		this.word = word;
 	}
 	
-	public int isEqualTo(Node node) {
+	public int compareTo(Node node) {
 		return word.compareTo(node.getWord());
 	}
 	

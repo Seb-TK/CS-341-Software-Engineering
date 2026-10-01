@@ -51,6 +51,7 @@ public class Dictionary {
 		
 		if(root == null) {
 			root = inputNode;
+			return;
 		}
 		
 		Node parentNode = findNodeOrPotentialParent(word);
@@ -114,31 +115,66 @@ public class Dictionary {
 	}
 	
 	public String toString() {
-		ArrayList<String> output = new ArrayList<String>();
+		ArrayList<String> outputList = new ArrayList<String>();
 		
 		if(root == null) {
 			return "Empty";
 		}
 		
 		Node pointer = root;
-		output.add(root.getWord());
+		outputList.add(root.getWord());
 		
-		while(true) {
+		for(int i = 0; i < 10; i ++) {
 			
-			if(pointer.left() != null) {
+			System.out.println("The current pointer is: " + pointer.getWord());
+			System.out.println("The current output is: " + outputList.toString());
+			
+			try {
+				System.out.println("The current pointer left is: " + pointer.left().getWord());
+			} catch(Exception e) {
+				System.out.println("Pointer left null is: " + (pointer.left() == null));
+			}
+			
+			try {
+				System.out.println("The current pointer right is: " + pointer.right().getWord());
+			} catch(Exception e) {
+				System.out.println("Pointer right null is: " + (pointer.right() == null));
+			}
+			
+			try {
+				System.out.println("The current pointer parent is: " + pointer.parent().getWord());
+			} catch(Exception e) {
+				System.out.println("Pointer parent " + (pointer.parent() == null));
+			}
+			System.out.println();
+			
+			
+			if(pointer.left() != null & !outputList.contains(pointer.left().getWord())) {
+				System.out.println("I am now going left to pointer: " + pointer.left().getWord());
 				pointer = pointer.left();
-				output.add(pointer.getWord());
-			} else if(pointer.right() != null) {
+				outputList.add(pointer.getWord());
+			} else if(pointer.right() != null & !outputList.contains(pointer.right().getWord())) {
+				System.out.println("I am now going right to pointer: " + pointer.right().getWord());
 				pointer = pointer.right();
-				output.add(pointer.getWord());
+				outputList.add(pointer.getWord());
 			} else if(pointer.parent() != null){
+				System.out.println("I am now going up to parent: " + pointer.parent().getWord());
 				pointer = pointer.parent();
 			} else {
 				break;
 			}
+			
 		}
 		
-		return output.toString();
+		//formats it
+		String output = "";
+		for(int i = 0; i < outputList.size(); i ++) {
+			if(i > 0) {
+				output += ", ";
+			}
+			output += outputList.get(i);
+		}
+		return String.valueOf(output);
 	}
 	
 	

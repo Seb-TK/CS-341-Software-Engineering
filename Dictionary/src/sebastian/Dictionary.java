@@ -20,7 +20,7 @@ public class Dictionary {
 	 *         or null if the dictionary is empty
 	 */
 	private Node findNodeOrPotentialParent(String word) {
-		Node inputNode = new Node(word);
+		Node inputNode = new Node(word.toLowerCase());
 		
 		if(root == null) {
 			//tree empty
@@ -53,17 +53,24 @@ public class Dictionary {
 		return pointer;
 	}
 	
-	
+	/**
+	 * Inserts a single word into the dictionary.
+	 *
+	 * <p>If the word already exists in the dictionary, it is not inserted
+	 * a second time.</p>
+	 *
+	 * @param word the word to insert into the dictionary
+	 */
 	public void insertWordNode(String word){
 		
-		Node inputNode = new Node(word);
+		Node inputNode = new Node(word.toLowerCase());
 		
 		if(root == null) {
 			root = inputNode;
 			return;
 		}
 		
-		Node parentNode = findNodeOrPotentialParent(word);
+		Node parentNode = findNodeOrPotentialParent(word.toLowerCase());
 		int nodeComparason = inputNode.compareTo(parentNode);
 		
 		if(nodeComparason < 0) {
@@ -76,18 +83,28 @@ public class Dictionary {
 		inputNode.setParent(parentNode);
 	}
 	
-	
+	/**
+	 * Inserts every word from the supplied text into the dictionary.
+	 *
+	 * <p>The text is split into individual words using spaces.</p>
+	 *
+	 * @param text the text containing the words to insert
+	 */
 	public void insertWordNodeLong(String text){
-		String[] textAsList = text.split("[^a-zA-Z]+");
+		String[] textAsList = text.toLowerCase().split("[^a-zA-Z]+");
 		for(int i = 0; i < textAsList.length; i++) {
 			insertWordNode(textAsList[i]);
 		}
 	}
 	
-	
+	/**
+	 * Removes a word from the dictionary if it exists.
+	 *
+	 * @param word the word to remove from the dictionary
+	 */
 	public void checkWord(String word) {
-		Node inputNode = new Node(word);
-		Node nodeToRemove = findNodeOrPotentialParent(word);
+		Node inputNode = new Node(word.toLowerCase());
+		Node nodeToRemove = findNodeOrPotentialParent(word.toLowerCase());
 		
 		int nodeComparison = nodeToRemove.compareTo(inputNode);
 		
@@ -120,17 +137,31 @@ public class Dictionary {
 		}
 	}
 	
+	/**
+	 * Removes every word in the supplied text from the dictionary
+	 * if the words exist.
+	 *
+	 * <p>The text is split into individual words using spaces.</p>
+	 *
+	 * @param text the text containing the words to remove
+	 */
 	public void checkWordLong(String text){
-		String[] textAsList = text.split(" ");
+		String[] textAsList = text.toLowerCase().split("[^a-zA-Z]+");
 		for(int i = 0; i < textAsList.length; i++) {
 			checkWord(textAsList[i]);
 		}
 	}
 	
+	/**
+	 * Checks whether a single word exists in the dictionary.
+	 *
+	 * @param word the word to check
+	 * @return true if the word exists, otherwise false
+	 */
 	private boolean spellCheckWord(String word){
 		
-		Node potentialNode = findNodeOrPotentialParent(word);
-		Node inputNode = new Node(word);
+		Node potentialNode = findNodeOrPotentialParent(word.toLowerCase());
+		Node inputNode = new Node(word.toLowerCase());
 		
 		if(potentialNode == null) {
 			return false;
@@ -145,10 +176,17 @@ public class Dictionary {
 		}
 	}
 	
-	//decided to make it work for text in general
+	/**
+	 * Checks whether every word in the supplied text exists
+	 * in the dictionary.
+	 *
+	 * @param text the text containing the words to check
+	 * @return true if every word exists in the dictionary,
+	 *         otherwise false
+	 */
 	public boolean spellCheck(String text) {
 		boolean output = true;
-		String[] textAsList = text.split(" ");
+		String[] textAsList = text.toLowerCase().split("[^a-zA-Z]+");
 		for(int i = 0; i < textAsList.length; i++) {
 			output = spellCheckWord(textAsList[i]);
 			if(output == false) {
@@ -158,9 +196,16 @@ public class Dictionary {
 		return output;
 	}
 	
-	
-	
-	
+	/**
+	 * Returns a string containing all words in the dictionary
+	 * in alphabetical order.
+	 *
+	 * <p>Words are separated by a comma and a space.</p>
+	 *
+	 * @return the words in alphabetical order, or null if the
+	 *         dictionary is empty
+	 */
+	@Override
 	public String toString() {
 		ArrayList<String> outputList = new ArrayList<String>();
 		
@@ -207,7 +252,11 @@ public class Dictionary {
 			if(i > 0) {
 				output += ", ";
 			}
-			output += outputList.get(i);
+			StringBuilder newWord = new StringBuilder(outputList.get(i));
+			char firstChar = newWord.charAt(0);
+			newWord.setCharAt(0, Character.toUpperCase(firstChar));
+			
+			output += newWord;
 		}
 		return String.valueOf(output);
 	}

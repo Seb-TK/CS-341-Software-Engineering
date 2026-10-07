@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"sebastian","l":"Node"},{"p":"sebastian","l":"NumberReader"},{"p":"sebastian","l":"NumberReaderGUI"},{"p":"sebastian","l":"NumberReaderList"},{"p":"sebastian","l":"NumberReaderTest"},{"p":"sebastian","l":"NumberReader.Result"}];updateSearchResults();

@@ -15,6 +15,11 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
+/**
+ * Provides a graphical user interface for the Number Reader application.
+ * Allows the user to select a file and displays the mean and standard
+ * derivative of the numbers contained in the file.
+ */
 public class NumberReaderGUI {
 
 	private JFrame frame;
@@ -22,7 +27,9 @@ public class NumberReaderGUI {
 	private NumberReader reader = new NumberReader();
 
 	/**
-	 * Launch the application.
+	 * Launches the application.
+	 *
+	 * @param args command-line arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -38,14 +45,15 @@ public class NumberReaderGUI {
 	}
 
 	/**
-	 * Create the application.
+	 * Creates the application and initializes the graphical interface.
 	 */
 	public NumberReaderGUI() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializes the contents of the frame and sets up the graphical
+	 * components and their event listeners.
 	 */
 	private void initialize() {
 		frame = new JFrame();

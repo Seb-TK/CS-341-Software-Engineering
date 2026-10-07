@@ -55,7 +55,7 @@ public class NumberReader {
 		SUCCESS(""),
 		FILE_NOT_FOUND("Error: File not found!\nMake sure to pick a .txt file."),
 		INVALID_FILE_TYPE("Error: invalid file type!\nMake sure to pick a file that ends with .txt"),
-		INVALID_DATA_TYPE("Error: File contains invalid data/format!\nMake sure that there is nothing but one integer per line.");
+		INVALID_DATA_TYPE("Error: File contains invalid data/format!\nMake sure that there is nothing but one real number per line.");
 		
 		private String errorMessage;
 		
@@ -102,7 +102,7 @@ public class NumberReader {
 		try (Scanner scanner = new Scanner(file)){
 			while(scanner.hasNextLine()) {
 				try {
-					numberList.addNode(Integer.parseInt(scanner.nextLine()));
+					numberList.addNode(Double.parseDouble(scanner.nextLine()));
 				} catch(NumberFormatException e) {
 					return Result.INVALID_DATA_TYPE;
 				}

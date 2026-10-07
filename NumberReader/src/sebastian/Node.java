@@ -6,7 +6,7 @@ package sebastian;
  */
 public class Node {
 
-	private int value;
+	private double value;
 
 	private Node child;
 
@@ -15,7 +15,7 @@ public class Node {
 	 *
 	 * @param value the integer value stored in this node
 	 */
-	public Node(int value) {
+	public Node(double value) {
 
 		this.value = value;
 
@@ -37,7 +37,7 @@ public class Node {
 	 *
 	 * @return the value stored in this node
 	 */
-	public int getValue() {
+	public double getValue() {
 
 		return value;
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class NumberReaderList {
 
 	Node head;
-	int totalValue;
+	double totalValue;
 	int listLength;
 	
 	/**
@@ -26,7 +26,7 @@ public class NumberReaderList {
 	 *
 	 * @param value the integer value to add to the list
 	 */
-	public void addNode(int value) {
+	public void addNode(double value) {
 		Node newNode = new Node(value);
 		totalValue += value;
 		listLength ++;
@@ -46,7 +46,7 @@ public class NumberReaderList {
 	 *
 	 * @return the total value of all elements in the list
 	 */
-	public int getTotalValue() {
+	public double getTotalValue() {
 		return totalValue;
 	}
 	
@@ -101,8 +101,8 @@ public class NumberReaderList {
 	 *
 	 * @return an ArrayList containing the values in the list
 	 */
-	public ArrayList<Integer> getList() {
-		ArrayList<Integer> list = new ArrayList<Integer>();
+	public ArrayList<Double> getList() {
+		ArrayList<Double> list = new ArrayList<Double>();
 		Node temp = head;
 		
 		if(temp==null) {
